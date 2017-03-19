@@ -15,6 +15,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PROJECT_HOME = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -42,6 +43,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',  # for delete post csrf check
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -181,6 +183,10 @@ LOGGING = {
 
     },
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+STATIC_ROOT = os.path.join(PROJECT_HOME, 'static')
 
 EMAIL_PORT = os.environ.get("mail_port", "")
 EMAIL_HOST = os.environ.get("mail_host", "")

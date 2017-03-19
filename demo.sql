@@ -116,7 +116,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +125,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$20000$tNenUOMJoXzh$nXXWTlvCwVTgp+SiJYFt90X4zU4REsASLuhS84W/lRg=','2017-03-12 02:19:48',1,'ningning','','','ningning@1.com',1,1,'2017-03-12 02:19:20');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$20000$tNenUOMJoXzh$nXXWTlvCwVTgp+SiJYFt90X4zU4REsASLuhS84W/lRg=','2017-03-12 02:19:48',1,'ningning','','','ningning@1.com',1,1,'2017-03-12 02:19:20'),(2,'pbkdf2_sha256$20000$sYrdAfkEcCOB$G7nvBjXNsrDgzm+uXjf1ewk9h4XyVSPGxDYHyA8kFE0=','2017-03-19 07:30:15',1,'tao-xu','','','ningning@1.com',1,1,'2017-03-19 07:30:06');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +195,7 @@ DROP TABLE IF EXISTS `demo_code`;
 CREATE TABLE `demo_code` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(32) NOT NULL,
-  `status` varchar(16) DEFAULT NULL,
+  `status` int(11),
   `metal_id` int(11),
   `pesticide_id` int(11),
   `water_id` int(11),
@@ -212,7 +212,7 @@ CREATE TABLE `demo_code` (
   CONSTRAINT `demo_code_pesticide_id_262b948652b10b11_fk_demo_pesticide_id` FOREIGN KEY (`pesticide_id`) REFERENCES `demo_pesticide` (`id`),
   CONSTRAINT `demo_code_water_id_523c057e5291afb4_fk_demo_water_id` FOREIGN KEY (`water_id`) REFERENCES `demo_water` (`id`),
   CONSTRAINT `demo_code_zone_id_34a48379a1bc4842_fk_demo_zone_id` FOREIGN KEY (`zone_id`) REFERENCES `demo_zone` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +221,7 @@ CREATE TABLE `demo_code` (
 
 LOCK TABLES `demo_code` WRITE;
 /*!40000 ALTER TABLE `demo_code` DISABLE KEYS */;
-INSERT INTO `demo_code` VALUES (1,'100000000','',1,1,1,NULL,NULL);
+INSERT INTO `demo_code` VALUES (1,'100000000',1,1,1,1,NULL,1),(2,'123456',2,2,3,1,1,1);
 /*!40000 ALTER TABLE `demo_code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +239,7 @@ CREATE TABLE `demo_goods` (
   PRIMARY KEY (`id`),
   KEY `demo_goods_06342dd7` (`zone_id`),
   CONSTRAINT `demo_goods_zone_id_4a0129448c45d448_fk_demo_zone_id` FOREIGN KEY (`zone_id`) REFERENCES `demo_zone` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,6 +248,7 @@ CREATE TABLE `demo_goods` (
 
 LOCK TABLES `demo_goods` WRITE;
 /*!40000 ALTER TABLE `demo_goods` DISABLE KEYS */;
+INSERT INTO `demo_goods` VALUES (1,'大白菜',1);
 /*!40000 ALTER TABLE `demo_goods` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +267,7 @@ CREATE TABLE `demo_metal` (
   PRIMARY KEY (`id`),
   KEY `demo_metal_06342dd7` (`zone_id`),
   CONSTRAINT `demo_metal_zone_id_6da6af69ef72c529_fk_demo_zone_id` FOREIGN KEY (`zone_id`) REFERENCES `demo_zone` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +276,7 @@ CREATE TABLE `demo_metal` (
 
 LOCK TABLES `demo_metal` WRITE;
 /*!40000 ALTER TABLE `demo_metal` DISABLE KEYS */;
-INSERT INTO `demo_metal` VALUES (1,'middle',30,NULL);
+INSERT INTO `demo_metal` VALUES (1,'middle',30,NULL),(2,'low',10,1);
 /*!40000 ALTER TABLE `demo_metal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +295,7 @@ CREATE TABLE `demo_pesticide` (
   PRIMARY KEY (`id`),
   KEY `demo_pesticide_06342dd7` (`zone_id`),
   CONSTRAINT `demo_pesticide_zone_id_1dc9c008f5d9e25e_fk_demo_zone_id` FOREIGN KEY (`zone_id`) REFERENCES `demo_zone` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +304,7 @@ CREATE TABLE `demo_pesticide` (
 
 LOCK TABLES `demo_pesticide` WRITE;
 /*!40000 ALTER TABLE `demo_pesticide` DISABLE KEYS */;
-INSERT INTO `demo_pesticide` VALUES (1,'middle',20,NULL);
+INSERT INTO `demo_pesticide` VALUES (1,'low',20,NULL),(2,'middle',40,1),(3,'low',20,1);
 /*!40000 ALTER TABLE `demo_pesticide` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,7 +323,7 @@ CREATE TABLE `demo_water` (
   PRIMARY KEY (`id`),
   KEY `demo_water_06342dd7` (`zone_id`),
   CONSTRAINT `demo_water_zone_id_70d00bd086f57b03_fk_demo_zone_id` FOREIGN KEY (`zone_id`) REFERENCES `demo_zone` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +332,7 @@ CREATE TABLE `demo_water` (
 
 LOCK TABLES `demo_water` WRITE;
 /*!40000 ALTER TABLE `demo_water` DISABLE KEYS */;
-INSERT INTO `demo_water` VALUES (1,'low',60,NULL);
+INSERT INTO `demo_water` VALUES (1,'low',20,1),(2,'middle',40,1);
 /*!40000 ALTER TABLE `demo_water` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,7 +349,7 @@ CREATE TABLE `demo_zone` (
   `source` varchar(16) NOT NULL,
   `work` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -357,6 +358,7 @@ CREATE TABLE `demo_zone` (
 
 LOCK TABLES `demo_zone` WRITE;
 /*!40000 ALTER TABLE `demo_zone` DISABLE KEYS */;
+INSERT INTO `demo_zone` VALUES (1,'黑龙江','low',1);
 /*!40000 ALTER TABLE `demo_zone` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -381,7 +383,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id` (`user_id`),
   CONSTRAINT `djang_content_type_id_697914295151027a_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -390,7 +392,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2017-03-12 02:38:10','1','middle-30.0',1,'',9,1),(2,'2017-03-12 02:38:24','1','middle-20.0',1,'',8,1),(3,'2017-03-12 02:38:35','1','low-60.0',1,'',7,1),(4,'2017-03-12 02:38:42','1','100000000',1,'',10,1);
+INSERT INTO `django_admin_log` VALUES (1,'2017-03-12 02:38:10','1','middle-30.0',1,'',9,1),(2,'2017-03-12 02:38:24','1','middle-20.0',1,'',8,1),(3,'2017-03-12 02:38:35','1','low-60.0',1,'',7,1),(4,'2017-03-12 02:38:42','1','100000000',1,'',10,1),(5,'2017-03-19 07:31:48','1','黑龙江',1,'',11,2),(6,'2017-03-19 07:31:50','1','大白菜-黑龙江',1,'',12,2),(7,'2017-03-19 07:32:06','2','low-10.0',1,'',9,2),(8,'2017-03-19 07:32:20','2','middle-40.0',1,'',8,2),(9,'2017-03-19 07:32:33','2','middle-40.0',1,'',7,2),(10,'2017-03-19 07:32:46','2','123456',1,'',10,2),(11,'2017-03-19 07:32:54','2','123456',2,'Changed zone.',10,2),(12,'2017-03-19 08:00:39','2','middle-40.0',2,'No fields changed.',8,2),(13,'2017-03-19 08:00:43','1','low-20.0',2,'No fields changed.',8,2),(14,'2017-03-19 08:01:24','2','123456',2,'Changed status.',10,2),(15,'2017-03-19 08:02:55','2','123456',2,'No fields changed.',10,2),(16,'2017-03-19 08:03:04','1','100000000',2,'No fields changed.',10,2),(17,'2017-03-19 08:03:18','1','100000000',2,'Changed zone.',10,2),(18,'2017-03-19 08:03:49','1','100000000',2,'No fields changed.',10,2),(19,'2017-03-19 08:42:05','2','123456',2,'Changed status.',10,2),(20,'2017-03-19 08:42:16','1','大白菜-黑龙江',2,'No fields changed.',12,2),(21,'2017-03-19 08:42:25','2','low-10.0',2,'No fields changed.',9,2),(22,'2017-03-19 08:42:37','3','low-20.0',1,'',8,2),(23,'2017-03-19 08:43:03','1','low-20.0',2,'Changed value and zone.',7,2),(24,'2017-03-19 08:43:08','2','123456',2,'Changed pesticide and water.',10,2);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,7 +435,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -442,7 +444,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2017-03-12 02:18:57'),(2,'auth','0001_initial','2017-03-12 02:18:58'),(3,'admin','0001_initial','2017-03-12 02:18:59'),(4,'contenttypes','0002_remove_content_type_name','2017-03-12 02:18:59'),(5,'auth','0002_alter_permission_name_max_length','2017-03-12 02:18:59'),(6,'auth','0003_alter_user_email_max_length','2017-03-12 02:18:59'),(7,'auth','0004_alter_user_username_opts','2017-03-12 02:18:59'),(8,'auth','0005_alter_user_last_login_null','2017-03-12 02:18:59'),(9,'auth','0006_require_contenttypes_0002','2017-03-12 02:18:59'),(10,'demo','0001_initial','2017-03-12 02:19:00'),(11,'sessions','0001_initial','2017-03-12 02:19:00'),(12,'demo','0002_auto_20170319_0724','2017-03-19 07:24:37');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2017-03-12 02:18:57'),(2,'auth','0001_initial','2017-03-12 02:18:58'),(3,'admin','0001_initial','2017-03-12 02:18:59'),(4,'contenttypes','0002_remove_content_type_name','2017-03-12 02:18:59'),(5,'auth','0002_alter_permission_name_max_length','2017-03-12 02:18:59'),(6,'auth','0003_alter_user_email_max_length','2017-03-12 02:18:59'),(7,'auth','0004_alter_user_username_opts','2017-03-12 02:18:59'),(8,'auth','0005_alter_user_last_login_null','2017-03-12 02:18:59'),(9,'auth','0006_require_contenttypes_0002','2017-03-12 02:18:59'),(10,'demo','0001_initial','2017-03-12 02:19:00'),(11,'sessions','0001_initial','2017-03-12 02:19:00'),(12,'demo','0002_auto_20170319_0724','2017-03-19 07:24:37'),(13,'demo','0003_auto_20170319_0801','2017-03-19 08:02:36');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,7 +470,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('9bmm01oehf4ep7dzcxypoui0ewvzej56','YWM3OTJlODUzZTQ3OWM4NjRkYzhkN2JiZTdkMmVmNzU2NTYyZGY1Mzp7Il9hdXRoX3VzZXJfaGFzaCI6IjlhZGEyOTVlYTBhOWYzNGQ0YWY4NmQ3YTJjOTE2YjI0ZTI2YWJjNjAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=','2017-03-26 02:19:48');
+INSERT INTO `django_session` VALUES ('9bmm01oehf4ep7dzcxypoui0ewvzej56','YWM3OTJlODUzZTQ3OWM4NjRkYzhkN2JiZTdkMmVmNzU2NTYyZGY1Mzp7Il9hdXRoX3VzZXJfaGFzaCI6IjlhZGEyOTVlYTBhOWYzNGQ0YWY4NmQ3YTJjOTE2YjI0ZTI2YWJjNjAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=','2017-03-26 02:19:48'),('a2tikg5d3nj93dpa2mgge8val998b0c8','Y2Y0NmI3MTljYWRjNmIxYWFjYzViYzA2ZGYyMmZiMjM5Yjg1ZmFkZDp7Il9hdXRoX3VzZXJfaGFzaCI6Ijg1MTJkNDFhM2ViZTkyMGZkZWVmYjQ1YjVjMTNlMzJmYzVjMWIyN2IiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=','2017-04-02 07:30:15');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -481,4 +483,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-19 15:25:07
+-- Dump completed on 2017-03-19 16:48:06
