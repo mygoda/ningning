@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import json
 from django.http import JsonResponse
+from django.views.generic import TemplateView
+
 from demo.models import *
 
 
-def index(req):
+def search(req):
     """
         首页
     :param req:
@@ -25,7 +27,7 @@ def index(req):
     return JsonResponse({"status": 1, "data": data})
 
 
-
-
+class IndexView(TemplateView):
+    template_name = "index.html"
 
 
