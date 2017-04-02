@@ -15,6 +15,7 @@
         </div>
         <div class="dropdown">
             <select id="select">
+                <option value ="">选择输入条件</option>
                 <option value ="code">编号搜索</option>
                 <option value ="zone">地区搜索</option>
                 <option value="good">蔬菜名称搜索</option>
@@ -32,17 +33,6 @@
         <div class="content">
             <img src="/static/img/show.png" alt="">
         </div>
-        <div class="result-wrap">
-            
-        </div>
-        <div class="result">
-            <div class="title">
-                <h1>蔬菜的查询结果</h1>
-            </div>
-            <div class="result-list">
-                
-            </div>
-        </div>
     </div>
 
 <script>
@@ -50,42 +40,44 @@
         $('#search').click(function(){
             var number = $('#number').val();
             var select = $('#select').val();
+            console.log(number)
             console.log(select)
-            var template = null;
-            $.ajax({
-                type: "GET",
-                url: "/search/?q_type=" + select + '&q=' + number,
-                dataType: "json",
-                success: function(data){
-                    console.log(data);
-                    var data = data.data;
-                    if (data.length == 0) {
-                        template = '<div class="info-wrap"><h1>暂无搜索结果</h1></div>';
-                        $('.result-list').html(template);
-                    }else{
-                        for (var i = 0; i < data.length; i++) {
-                            console.log(data[i])
-                            template = '<div class="info-wrap">'+
-                                            '<div class="info">';
-                            template += '<p>原产地:<span class="">'+ data[i].zone +'</span></p>';
-                            template += '<p>蔬菜名称:<span class="">'+ data[i].name +'</span></p>';
-                            template += '<p>原产地灌溉水质量:<span class="">'+ data[i].w_status +'</span></p>';
-                            template += '<p>蔬菜农药残余量:<span class="">'+ data[i].p_status +'</span></p>';
-                            template += '<p>原产地土壤盐碱化程度:<span class="">'+ data[i].m_status +'</span></p>';
-                            console.log(data.status);
-                            if (data[i].status == 0) {
-                                template += '<div class="tip tip0"><h1>该蔬菜严重污染！</h1></div>';
-                            }else if (data[i].status == 1) {
-                                template += '<div class="tip tip1"><h1>请注意蔬菜安全！</h1></div>';
-                            }else if (data[i].status == 2) {
-                                template += '<div class="tip tip2"><h1>请放心食用</h1></div>';
-                            }
-                            template += '</div></div>';
-                            $('.result-list').html(template);
-                        }
-                    }
-                }
-            })
+            window.location.href = "search.html/?number="+ number + "&select=" + select;
+            // var template = null;
+            // $.ajax({
+            //     type: "GET",
+            //     url: "/search/?q_type=" + select + '&q=' + number,
+            //     dataType: "json",
+            //     success: function(data){
+            //         console.log(data);
+            //         var data = data.data;
+            //         if (data.length == 0) {
+            //             template = '<div class="info-wrap"><h1>暂无搜索结果</h1></div>';
+            //             $('.result-list').html(template);
+            //         }else{
+            //             for (var i = 0; i < data.length; i++) {
+            //                 console.log(data[i])
+            //                 template = '<div class="info-wrap">'+
+            //                                 '<div class="info">';
+            //                 template += '<p>原产地:<span class="">'+ data[i].zone +'</span></p>';
+            //                 template += '<p>蔬菜名称:<span class="">'+ data[i].name +'</span></p>';
+            //                 template += '<p>原产地灌溉水质量:<span class="">'+ data[i].w_status +'</span></p>';
+            //                 template += '<p>蔬菜农药残余量:<span class="">'+ data[i].p_status +'</span></p>';
+            //                 template += '<p>原产地土壤盐碱化程度:<span class="">'+ data[i].m_status +'</span></p>';
+            //                 console.log(data.status);
+            //                 if (data[i].status == 0) {
+            //                     template += '<div class="tip tip0"><h1>该蔬菜严重污染！</h1></div>';
+            //                 }else if (data[i].status == 1) {
+            //                     template += '<div class="tip tip1"><h1>请注意蔬菜安全！</h1></div>';
+            //                 }else if (data[i].status == 2) {
+            //                     template += '<div class="tip tip2"><h1>请放心食用</h1></div>';
+            //                 }
+            //                 template += '</div></div>';
+            //                 $('.result-list').html(template);
+            //             }
+            //         }
+            //     }
+            // })
         })
     })
 </script>
