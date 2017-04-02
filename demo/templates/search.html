@@ -50,6 +50,9 @@
 
         searchAjax(select, number)
 
+        $("#number").val(number)
+        $("#select").val(select)
+
         $('#search').click(function(){
             var number = $('#number').val();
             var select = $('#select').val();

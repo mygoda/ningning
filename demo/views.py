@@ -31,3 +31,7 @@ class IndexView(TemplateView):
     template_name = "index.html"
 
 
+class SearchView(TemplateView):
+    template_name = "search.html"
+
+
