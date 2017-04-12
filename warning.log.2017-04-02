@@ -1,0 +1,3 @@
+WARNING 2017-04-02 07:11:37,392 base 61680 123145439379456 /Users/tao-xu/.virtualenvs/opus/lib/python2.7/site-packages/django/core/handlers/base.py 170 get_response Not Found: /result/
+WARNING 2017-04-02 07:12:43,106 base 61680 123145439379456 /Users/tao-xu/.virtualenvs/opus/lib/python2.7/site-packages/django/core/handlers/base.py 170 get_response Not Found: /result/
+WARNING 2017-04-02 07:12:46,556 base 61680 123145443586048 /Users/tao-xu/.virtualenvs/opus/lib/python2.7/site-packages/django/core/handlers/base.py 170 get_response Not Found: /result

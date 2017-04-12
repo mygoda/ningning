@@ -181,14 +181,14 @@ class Code(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
-        if self.metal.quality == "low" and self.pesticide.quality == "low" and self.water.quality == "low":
-            # 非常好
-            self.status = 2
-        elif self.metal.quality == "high" and self.pesticide.quality == "high" and self.water.quality == "high":
-            self.status = 0
-        else:
-            self.status = 1
+        if self.metal and self.pesticide and self.water:
+            if self.metal.quality == "low" and self.pesticide.quality == "low" and self.water.quality == "low":
+                # 非常好
+                self.status = 2
+            elif self.metal.quality == "high" and self.pesticide.quality == "high" and self.water.quality == "high":
+                self.status = 0
+            else:
+                self.status = 1
         return super(Code, self).save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
 
     def to_json(self):
