@@ -17,7 +17,7 @@ def search(req):
     codes = []
     if not q:
         codes = Code.objects.all()
-    if not q_type:
+    if str(q_type) == "null":
         codes = Code.objects.filter(code__icontains=q)
     else:
         if q and not q_type:
