@@ -110,7 +110,7 @@ class Metal(models.Model):
         金属含量
     """
     class Meta:
-        verbose_name = verbose_name_plural = u"金属含量"
+        verbose_name = verbose_name_plural = u"土壤盐碱化程度"
 
     LEVEL = (
         ("low", "低"),
