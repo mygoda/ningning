@@ -11,7 +11,11 @@ URL = "http://qr.liantu.com/api.php?&w=200&text=http://103.241.231.154:8888/resu
 
 class CodeAdmin(admin.ModelAdmin):
 
-    list_display = ["code", "status"]
+    list_display = ["rfid_show", "code", "status"]
+
+    def rfid_show(self, obj):
+        return obj.rfid.cardId if obj.rfid else obj.code
+    rfid_show.short_description = u"rfid"
 
     def response_add(self, request, obj, post_url_continue=None):
         return HttpResponseRedirect("%s%s" % (URL, obj.code))

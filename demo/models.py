@@ -161,6 +161,16 @@ class Goods(models.Model):
         return "%s-%s" % (self.name, self.zone)
 
 
+class Rfid(models.Model):
+
+    id = models.CharField(u"ID", default="1", max_length=255, null=True, blank=True)
+    cardId = models.CharField(u"cardID", default="1", max_length=255, null=True, blank=True)
+    createtime = models.CharField(u"cardID", default="1", max_length=255, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.id if self.id else ""
+
+
 class Code(models.Model):
     """
         编码
@@ -169,6 +179,7 @@ class Code(models.Model):
         verbose_name = verbose_name_plural = u"数据记录"
 
     code = models.CharField(u"编码", default="1", max_length=32)
+    rfid = models.ForeignKey(Rfid, verbose_name=u"rfid", null=True, blank=True)
     goods = models.ForeignKey(Goods, verbose_name=u"蔬菜", null=True, blank=True)
     metal = models.ForeignKey(Metal, verbose_name=u"金属", null=True, blank=True)
     pesticide = models.ForeignKey(Pesticide, verbose_name=u"农药", null=True, blank=True)
@@ -200,3 +211,4 @@ class Code(models.Model):
             "status": self.status,
             "zone": self.zone.name
         }
+
