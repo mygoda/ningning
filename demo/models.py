@@ -163,7 +163,7 @@ class Goods(models.Model):
 
 class Rfid(models.Model):
 
-    id = models.CharField(u"ID", default="1", max_length=255, null=True, blank=True)
+    id = models.CharField(u"ID", default="1", max_length=255, primary_key=True)
     cardId = models.CharField(u"cardID", default="1", max_length=255, null=True, blank=True)
     createtime = models.CharField(u"cardID", default="1", max_length=255, null=True, blank=True)
 
