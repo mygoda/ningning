@@ -168,7 +168,7 @@ class Rfid(models.Model):
     createtime = models.CharField(u"cardID", default="1", max_length=255, null=True, blank=True)
 
     def __unicode__(self):
-        return self.id if self.id else ""
+        return self.cardId if self.cardId else ""
 
 
 class Code(models.Model):
