@@ -178,7 +178,6 @@ class Code(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = u"数据记录"
 
-    code = models.CharField(u"编码", default="1", max_length=32)
     rfid = models.ForeignKey(Rfid, verbose_name=u"rfid", null=True, blank=True)
     goods = models.ForeignKey(Goods, verbose_name=u"蔬菜", null=True, blank=True)
     metal = models.ForeignKey(Metal, verbose_name=u"金属", null=True, blank=True)
@@ -188,7 +187,7 @@ class Code(models.Model):
     status = models.IntegerField(u"质量", default=0, null=True, blank=True)
 
     def __unicode__(self):
-        return self.code
+        return self.rfid_id if self.rfid else "无"
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

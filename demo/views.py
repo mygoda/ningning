@@ -19,12 +19,12 @@ def search(req):
     if not q:
         codes = Code.objects.all()
     if q_type not in ["code", "zone", "good"]:
-        codes = Code.objects.filter(Q(code__icontains=q) | Q(rfid__cardId__icontains=q))
+        codes = Code.objects.filter(rfid__cardId__icontains=q)
     else:
         if q and not q_type:
-            codes = Code.objects.filter(Q(code__icontains=q) | Q(rfid__cardId__icontains=q))
+            codes = Code.objects.filter(rfid__cardId__icontains=q)
         elif q and q_type == "code":
-            codes = Code.objects.filter(Q(code__icontains=q) | Q(rfid__cardId__icontains=q))
+            codes = Code.objects.filter(rfid__cardId__icontains=q)
         elif q and q_type == "zone":
             codes = Code.objects.filter(zone__name__icontains=q)
         elif q and q_type == "good":
