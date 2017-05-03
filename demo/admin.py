@@ -11,7 +11,7 @@ URL = "http://qr.liantu.com/api.php?&w=200&text=http://103.241.231.154:8888/resu
 
 class CodeAdmin(admin.ModelAdmin):
 
-    list_display = ["rfid_show", "code", "status"]
+    list_display = ["rfid_show", "status"]
 
     def rfid_show(self, obj):
         return obj.rfid.cardId if obj.rfid else obj.code
