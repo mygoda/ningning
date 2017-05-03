@@ -14,11 +14,11 @@ class CodeAdmin(admin.ModelAdmin):
     list_display = ["rfid_show", "status"]
 
     def rfid_show(self, obj):
-        return obj.rfid.cardId if obj.rfid else obj.code
+        return obj.rfid.cardId if obj.rfid else "无"
     rfid_show.short_description = u"rfid"
 
     def response_add(self, request, obj, post_url_continue=None):
-        return HttpResponseRedirect("%s%s" % (URL, obj.code))
+        return HttpResponseRedirect("%s%s" % (URL, obj.rfid_id if obj.rfid else ""))
 
 
 for model_name, obj in inspect.getmembers(models):
