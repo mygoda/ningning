@@ -18,7 +18,7 @@ class CodeAdmin(admin.ModelAdmin):
     rfid_show.short_description = u"rfid"
 
     def response_add(self, request, obj, post_url_continue=None):
-        return HttpResponseRedirect("%s%s" % (URL, obj.rfid_id if obj.rfid else ""))
+        return HttpResponseRedirect("%s%s" % (URL, obj.rfid.cardId if obj.rfid else ""))
 
 
 for model_name, obj in inspect.getmembers(models):
