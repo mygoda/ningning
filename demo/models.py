@@ -185,6 +185,7 @@ class Code(models.Model):
     water = models.ForeignKey(Water, verbose_name=u"水", null=True, blank=True)
     zone = models.ForeignKey(Zone, verbose_name=u"地区", null=True, blank=True)
     status = models.IntegerField(u"质量", default=0, null=True, blank=True)
+    sale = models.CharField(u"销售地", max_length=32, null=True, blank=True, default="上海")
 
     def __unicode__(self):
         return self.rfid_id if self.rfid else "无"
@@ -208,6 +209,7 @@ class Code(models.Model):
             "m_status": self.metal.status_msg,
             "w_status": self.water.status_msg,
             "status": self.status,
-            "zone": self.zone.name
+            "zone": self.zone.name,
+            "sale": self.sale
         }
 
