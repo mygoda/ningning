@@ -210,6 +210,6 @@ class Code(models.Model):
             "w_status": self.water.status_msg,
             "status": self.status,
             "zone": self.zone.name,
-            "sale": self.sale
+            "sale": self.sale if self.sale else "暂无"
         }
 
